@@ -1,0 +1,239 @@
+<div class="d-flex justify-content-between align-items-center pb-3 mb-4 border-bottom">
+
+    <div>
+        <h2 class="fw-bold mb-1">Gestión de Habitaciones</h2>
+        <p class="text-secondary mb-0">
+            Administra el inventario de habitaciones y su disponibilidad.
+        </p>
+    </div>
+
+    <button class="btn btn-primary px-4 shadow-sm" onclick="abrirFormularioHabitacion()">
+        <i class="bi bi-plus-lg me-2"></i>
+        Nueva Habitación
+    </button>
+
+</div>
+
+<!-- Buscador -->
+
+<div class="card border-0 shadow-sm rounded-4 mb-4">
+
+    <div class="card-body p-4">
+
+        <div class="input-group">
+
+            <span class="input-group-text bg-white border-end-0">
+                <i class="bi bi-search"></i>
+            </span>
+
+            <input
+                type="text"
+                class="form-control form-control-lg border-start-0"
+                id="buscar-habitacion"
+                placeholder="Buscar por número o tipo de habitación...">
+
+            <button
+                class="btn btn-primary px-4"
+                type="button"
+                onclick="buscarHabitaciones()">
+
+                Buscar
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Tabla -->
+
+<div class="card border-0 shadow-sm rounded-4">
+
+    <div class="card-body p-0">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover table-striped align-middle mb-0">
+
+                <thead class="table-primary">
+
+                    <tr>
+
+                        <th class="ps-4">Número</th>
+
+                        <th>Planta</th>
+
+                        <th>Tipo</th>
+
+                        <th>Estado</th>
+
+                        <th class="text-end pe-4">Acciones</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tabla-habitacion">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Modal -->
+
+<div class="modal fade" id="modal-habitacion" tabindex="-1" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+
+        <div class="modal-content border-0 rounded-4 shadow">
+
+            <form id="form-habitacion" class="needs-validation" novalidate>
+
+                <div class="modal-header bg-primary text-white">
+
+                    <h5 class="modal-title fw-semibold" id="titulo-modal-habitacion">
+                        Nueva Habitación
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="modal">
+                    </button>
+
+                </div>
+
+                <div class="modal-body p-4">
+
+                    <input type="hidden" id="id_habitacion">
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label fw-semibold" for="numero">
+                                Número
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control form-control-lg"
+                                id="numero"
+                                maxlength="10"
+                                pattern="[0-9A-Za-z-]{1,10}"
+                                placeholder="Ej: 101 o 12-A"
+                                required>
+
+                            <div class="invalid-feedback">
+                                El número es obligatorio (letras, números y guiones; máx. 10 caracteres).
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label fw-semibold" for="planta">
+                                Planta
+                            </label>
+
+                            <input
+                                type="number"
+                                class="form-control form-control-lg"
+                                id="planta"
+                                min="0"
+                                max="200"
+                                required>
+
+                            <div class="invalid-feedback">
+                                Ingrese una planta válida.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mb-4">
+
+                        <label class="form-label fw-semibold" for="id_tipo_habitacion">
+                            Tipo de Habitación
+                        </label>
+
+                        <select
+                            class="form-select form-select-lg"
+                            id="id_tipo_habitacion"
+                            required>
+                        </select>
+
+                        <div class="invalid-feedback">
+                            Seleccione un tipo de habitación.
+                        </div>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label fw-semibold" for="estado">
+                            Estado
+                        </label>
+
+                        <select
+                            class="form-select form-select-lg"
+                            id="estado"
+                            required>
+
+                            <option value="disponible">
+                                Disponible
+                            </option>
+
+                            <option value="ocupada">
+                                Ocupada
+                            </option>
+
+                            <option value="mantenimiento">
+                                Mantenimiento
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer py-3">
+
+                    <button
+                        type="button"
+                        class="btn btn-outline-secondary px-4"
+                        data-bs-dismiss="modal">
+
+                        Cancelar
+
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary px-4">
+
+                        <i class="bi bi-check-circle me-2"></i>
+
+                        Guardar Habitación
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

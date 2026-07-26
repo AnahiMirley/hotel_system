@@ -1,0 +1,212 @@
+<div class="login-wrap">
+    <div class="login-card">
+        <div class="login-marca">
+            <span class="sidebar-marca-icono"><i class="bi bi-building"></i></span>
+            <div>
+                <strong>Sistema de Gestión Hotelera</strong>
+                <small class="d-block text-muted">Inicia sesión para continuar</small>
+            </div>
+        </div>
+
+        <form id="form-login" class="needs-validation mt-4" novalidate method="post">
+            <div class="mb-3">
+                <label class="form-label" for="usuario">Usuario</label>
+                <input
+                    type="text"
+                    class="form-control form-control-lg"
+                    id="usuario"
+                    name="usuario"
+                    autocomplete="username"
+                    maxlength="50"
+                    required
+                    autofocus>
+                <div class="invalid-feedback">Ingresa tu usuario.</div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="password">Contraseña</label>
+                <div class="input-group">
+                    <input
+                        type="password"
+                        class="form-control form-control-lg"
+                        id="password"
+                        name="password"
+                        autocomplete="current-password"
+                        maxlength="100"
+                        required>
+                    <button class="btn btn-outline-secondary" type="button" id="btn-ver-password" tabindex="-1">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                </div>
+                <div class="invalid-feedback">Ingresa tu contraseña.</div>
+            </div>
+
+            <div class="alert alert-danger py-2 small d-none" id="login-error" role="alert"></div>
+
+            <button type="submit" class="btn btn-primary btn-lg w-100 mt-2" id="btn-login">
+                <i class="bi bi-box-arrow-in-right me-1"></i> Iniciar sesión
+            </button>
+        </form>
+    </div>
+</div>
+
+<style>
+.login-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    padding: 40px;
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.login-marca {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.sidebar-marca-icono {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 10px;
+    font-size: 28px;
+}
+
+.login-marca strong {
+    display: block;
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.login-marca small {
+    font-size: 13px;
+    color: #999 !important;
+}
+
+.form-label {
+    color: #444;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.form-control {
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px 15px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    outline: none;
+}
+
+.form-control::placeholder {
+    color: #bbb;
+}
+
+.input-group .btn {
+    border: 2px solid #e0e0e0;
+    border-left: none;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+.input-group .btn:hover {
+    border-color: #667eea;
+    color: #667eea;
+}
+
+.input-group .form-control:focus + .btn {
+    border-color: #667eea;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-top: 20px !important;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.mb-3 {
+    margin-bottom: 20px;
+}
+
+.alert {
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 20px;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 13px;
+    margin-top: 5px;
+    display: none;
+}
+
+.needs-validation.was-validated .form-control:invalid ~ .invalid-feedback {
+    display: block;
+}
+
+@media (max-width: 480px) {
+    .login-card {
+        padding: 30px 20px;
+    }
+    
+    .sidebar-marca-icono {
+        width: 45px;
+        height: 45px;
+        font-size: 24px;
+    }
+    
+    .login-marca strong {
+        font-size: 18px;
+    }
+}
+</style>

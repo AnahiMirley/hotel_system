@@ -1,0 +1,279 @@
+<div class="d-flex justify-content-between align-items-center pb-3 mb-4 border-bottom">
+    <div>
+        <h2 class="fw-bold mb-1">Gestión de Clientes</h2>
+        <p class="text-secondary mb-0">
+            Administra los huéspedes registrados en el sistema.
+        </p>
+    </div>
+
+    <button class="btn btn-primary px-4 shadow-sm" onclick="abrirFormularioCliente()">
+        <i class="bi bi-plus-lg me-2"></i>
+        Nuevo Cliente
+    </button>
+</div>
+
+<!-- Buscador -->
+<div class="card border-0 shadow-sm rounded-4 mb-4">
+    <div class="card-body p-4">
+
+        <div class="input-group">
+
+            <span class="input-group-text bg-white border-end-0">
+                <i class="bi bi-search"></i>
+            </span>
+
+            <input
+                type="text"
+                class="form-control form-control-lg border-start-0"
+                id="buscar-cliente"
+                placeholder="Buscar por nombre, apellido o DNI...">
+
+            <button
+                class="btn btn-primary px-4"
+                type="button"
+                onclick="buscarClientes()">
+                Buscar
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- Tabla -->
+<div class="card border-0 shadow-sm rounded-4">
+
+    <div class="card-body p-0">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover table-striped align-middle mb-0">
+
+                <thead class="table-primary">
+
+                    <tr>
+
+                        <th class="ps-4">Nombre</th>
+
+                        <th>DNI</th>
+
+                        <th>Teléfono</th>
+
+                        <th>Email</th>
+
+                        <th class="text-end pe-4">Acciones</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tabla-cliente">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Modal Cliente -->
+<div class="modal fade" id="modal-cliente" tabindex="-1" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+
+        <div class="modal-content border-0 shadow rounded-4">
+
+            <form id="form-cliente" class="needs-validation" novalidate>
+
+                <div class="modal-header bg-primary text-white">
+
+                    <h5 class="modal-title fw-semibold" id="titulo-modal-cliente">
+                        Nuevo Cliente
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="modal">
+                    </button>
+
+                </div>
+
+                <div class="modal-body p-4">
+
+                    <input type="hidden" id="id_cliente">
+
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+
+                            <label for="nombre" class="form-label fw-semibold">
+                                Nombre <span class="text-danger">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control form-control-lg"
+                                id="nombre"
+                                maxlength="80"
+                                minlength="2"
+                                pattern="[\p{L}\s.'-]{2,80}"
+                                placeholder="Ej: Juan"
+                                oninput="soloLetras(event)"
+                                required>
+
+                            <div class="invalid-feedback">
+                                El nombre es obligatorio (solo letras y espacios, mínimo 2 caracteres).
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label for="apellido" class="form-label fw-semibold">
+                                Apellido <span class="text-danger">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control form-control-lg"
+                                id="apellido"
+                                maxlength="80"
+                                minlength="2"
+                                pattern="[\p{L}\s.'-]{2,80}"
+                                placeholder="Ej: Pérez"
+                                oninput="soloLetras(event)"
+                                required>
+
+                            <div class="invalid-feedback">
+                                El apellido es obligatorio (solo letras y espacios, mínimo 2 caracteres).
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mt-4">
+
+                        <label for="dni" class="form-label fw-semibold">
+                            DNI / Cédula <span class="text-danger">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control form-control-lg"
+                            id="dni"
+                            maxlength="10"
+                            pattern="[0-9]{10}"
+                            placeholder="Ej: 1712345678"
+                            inputmode="numeric"
+                            autocomplete="off"
+                            oninput="soloNumeros(event)"
+                            required>
+
+                        <small class="form-text text-muted d-block mt-2">
+                            Debe tener exactamente 10 dígitos numéricos.
+                        </small>
+
+                        <div class="invalid-feedback d-block">
+                            El DNI es obligatorio y debe contener exactamente 10 números.
+                        </div>
+
+                    </div>
+
+                    <div class="mt-3">
+
+                        <label for="direccion" class="form-label fw-semibold">
+                            Dirección
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control form-control-lg"
+                            id="direccion"
+                            maxlength="150"
+                            placeholder="Ej: Calle Principal 123">
+
+                    </div>
+
+                    <div class="row g-3 mt-1">
+
+                        <div class="col-md-6">
+
+                            <label for="telefono" class="form-label fw-semibold">
+                                Teléfono <span class="text-danger">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control form-control-lg"
+                                id="telefono"
+                                maxlength="20"
+                                minlength="7"
+                                pattern="[0-9+\-\s]{7,20}"
+                                placeholder="Ej: 0991234567"
+                                inputmode="tel"
+                                oninput="soloTelefono(event)"
+                                required>
+
+                            <small class="form-text text-muted d-block mt-2">
+                                Se aceptan números, espacios, guiones y +.
+                            </small>
+
+                            <div class="invalid-feedback d-block">
+                                El teléfono es obligatorio (7 a 20 caracteres: números, espacios, guiones o +).
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label for="email" class="form-label fw-semibold">
+                                Correo electrónico
+                            </label>
+
+                            <input
+                                type="email"
+                                class="form-control form-control-lg"
+                                id="email"
+                                maxlength="120"
+                                placeholder="Ej: correo@ejemplo.com">
+
+                            <div class="invalid-feedback d-block">
+                                Ingrese un correo electrónico válido.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer py-3">
+
+                    <button
+                        type="button"
+                        class="btn btn-outline-secondary px-4"
+                        data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary px-4">
+                        <i class="bi bi-check-circle me-2"></i>
+                        Guardar Cliente
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
