@@ -177,8 +177,8 @@ $actual = $vistas[$vista];
 
         <div class="sidebar-nav nav flex-column p-2 gap-1">
             <?php foreach ($vistas as $clave => $info): ?>
-            <a href="index.php?vista=<?= $clave ?>"
-               class="nav-link rounded px-3 py-2 d-flex align-items-center gap-2 text-dark <?= $vista === $clave ? 'active bg-primary text-white' : 'link-dark' ?>">
+           <a href="index.php?vista=<?= $clave ?>"
+   class="nav-link rounded px-3 py-2 d-flex align-items-center gap-2 <?= $vista === $clave ? 'active bg-primary text-white' : '' ?>"></a>
                 <i class="bi <?= $info['icono'] ?> fs-5"></i>
                 <span><?= htmlspecialchars($info['titulo']) ?></span>
             </a>
