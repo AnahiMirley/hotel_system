@@ -19,6 +19,8 @@ abstract class BaseController
 
     protected function manejarExcepcion(Throwable $e): void
     {
+        error_log('EXCEPCION LOGIN: ' . $e->getMessage()); // <-- línea temporal de diagnóstico
+        
         $mensaje = 'Error en el servidor.';
         // 23000 = violación de restricción de integridad (FK, UNIQUE, CHECK)
         if ($e instanceof PDOException && str_starts_with((string) $e->getCode(), '23')) {
