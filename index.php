@@ -166,31 +166,31 @@ $actual = $vistas[$vista];
 <div class="overlay-sidebar d-lg-none" id="overlay-sidebar"></div>
 
 <div class="d-flex app-layout">
-    <nav class="sidebar bg-white border-end shadow-sm" id="sidebar">
-        <div class="sidebar-marca p-3 border-bottom d-flex align-items-center gap-2">
-            <span class="sidebar-marca-icono fs-4 text-primary"><i class="bi bi-building"></i></span>
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-marca">
+            <span class="sidebar-marca-icono"><i class="bi bi-building"></i></span>
             <div class="sidebar-marca-texto">
-                <strong class="d-block text-dark">Hotel System</strong>
-                <small class="text-muted">Panel administrativo</small>
+                <strong class="d-block">Hotel System</strong>
+                <small>Panel administrativo</small>
             </div>
         </div>
 
-        <div class="sidebar-nav nav flex-column p-2 gap-1">
+        <div class="sidebar-nav nav flex-column">
             <?php foreach ($vistas as $clave => $info): ?>
             <a href="index.php?vista=<?= $clave ?>"
-               class="nav-link rounded px-3 py-2 d-flex align-items-center gap-2 text-white <?= $vista === $clave ? 'active bg-primary' : 'link-light' ?>">
-                <i class="bi <?= $info['icono'] ?> fs-5"></i>
+               class="nav-link<?= $vista === $clave ? ' active' : '' ?>">
+                <span class="sidebar-icono"><i class="bi <?= $info['icono'] ?>"></i></span>
                 <span><?= htmlspecialchars($info['titulo']) ?></span>
             </a>
             <?php endforeach; ?>
         </div>
 
-        <div class="sidebar-pie p-3 border-top mt-auto d-flex align-items-center justify-content-between">
-            <div class="sidebar-pie-usuario d-flex align-items-center gap-2">
-                <i class="bi bi-person-circle fs-4 text-secondary"></i>
+        <div class="sidebar-pie">
+            <div class="sidebar-pie-usuario">
+                <i class="bi bi-person-circle"></i>
                 <span class="small fw-semibold text-truncate" style="max-width: 120px;"><?= htmlspecialchars($_SESSION['usuario_nombre'] ?? '') ?></span>
             </div>
-            <button type="button" class="btn btn-outline-danger btn-sm btn-logout" id="btn-logout" title="Cerrar sesión">
+            <button type="button" class="btn btn-logout" id="btn-logout" title="Cerrar sesión">
                 <i class="bi bi-box-arrow-right"></i>
             </button>
         </div>

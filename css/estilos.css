@@ -28,6 +28,31 @@
     --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --radius: 12px;
     --radius-lg: 16px;
+
+    /* ------------------------------------------------------------
+       Alinea las variables de Bootstrap con la paleta propia.
+       Sin esto, utilidades de Bootstrap como bg-primary, text-success,
+       text-bg-warning, table-primary, etc. pintan sus colores por
+       defecto (azul/verde/amarillo estándar de Bootstrap) en vez de
+       los colores de marca definidos arriba, generando combinaciones
+       que no coinciden entre sí en distintas pantallas.
+       ------------------------------------------------------------ */
+    --bs-primary: var(--primary);
+    --bs-primary-rgb: 11, 110, 88;
+    --bs-secondary: var(--secondary);
+    --bs-secondary-rgb: 15, 43, 68;
+    --bs-success: var(--success);
+    --bs-success-rgb: 16, 185, 129;
+    --bs-danger: var(--danger);
+    --bs-danger-rgb: 239, 68, 68;
+    --bs-warning: var(--warning);
+    --bs-warning-rgb: 245, 158, 11;
+    --bs-info: var(--info);
+    --bs-info-rgb: 6, 182, 212;
+    --bs-link-color: var(--primary);
+    --bs-link-color-rgb: 11, 110, 88;
+    --bs-link-hover-color: var(--primary-dark);
+    --bs-link-hover-color-rgb: 8, 74, 58;
 }
 
 * {
@@ -719,6 +744,15 @@ html, body {
     border: 1px solid var(--border);
 }
 
+.badge-pax {
+    background-color: rgba(11, 110, 88, 0.1);
+    color: var(--primary-dark);
+    border: 1px solid rgba(11, 110, 88, 0.2);
+    font-weight: 600;
+    padding: 0.4em 0.75em;
+    border-radius: 999px;
+}
+
 .badge-estrellas i {
     color: var(--warning);
 }
@@ -784,11 +818,16 @@ html, body {
     }
 
     .sidebar {
-        position: sticky;
+        position: fixed;
         top: 70px;
-        transform: none !important;
-        visibility: visible !important;
+        left: 0;
         width: 270px;
+        height: calc(100vh - 70px);
+        transform: translateX(-100%);
+    }
+
+    .sidebar.abierto {
+        transform: translateX(0);
     }
 
     .contenido {

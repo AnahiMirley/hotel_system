@@ -29,7 +29,7 @@ function pintarTipos(lista) {
             <td><img src="${imagenTipoHabitacion(t.id_tipo_habitacion)}" class="thumb-tipo" alt="${escaparHtml(t.nombre)}"></td>
             <td class="fw-semibold">${escaparHtml(t.nombre)}</td>
             <td class="text-muted">${escaparHtml(t.descripcion)}</td>
-            <td><span class="badge text-bg-light border">${t.capacidad} pax</span></td>
+            <td><span class="badge badge-pax">${t.capacidad} pax</span></td>
             <td>$${parseFloat(t.precio_base).toFixed(2)}</td>
             <td class="text-end tabla-acciones">
                 <button class="btn btn-sm btn-outline-primary" onclick="editarTipo(${t.id_tipo_habitacion})">

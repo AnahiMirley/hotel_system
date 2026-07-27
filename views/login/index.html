@@ -1,10 +1,10 @@
 <div class="login-wrap">
     <div class="login-card">
         <div class="login-marca">
-            <span class="sidebar-marca-icono"><i class="bi bi-building"></i></span>
+            <span class="login-marca-icono"><i class="bi bi-building"></i></span>
             <div>
                 <strong>Sistema de Gestión Hotelera</strong>
-                <small class="d-block text-muted">Inicia sesión para continuar</small>
+                <small class="d-block">Inicia sesión para continuar</small>
             </div>
         </div>
 
@@ -56,7 +56,7 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
     padding: 20px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
@@ -90,28 +90,29 @@
     text-align: left;
 }
 
-.sidebar-marca-icono {
+.login-marca-icono {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
     color: white;
     border-radius: 10px;
     font-size: 28px;
+    flex-shrink: 0;
 }
 
 .login-marca strong {
     display: block;
     font-size: 20px;
-    color: #333;
+    color: var(--text);
     margin-bottom: 5px;
 }
 
 .login-marca small {
     font-size: 13px;
-    color: #999 !important;
+    color: var(--text-muted) !important;
 }
 
 .form-label {
@@ -130,8 +131,8 @@
 }
 
 .form-control:focus {
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(11, 110, 88, 0.1);
     outline: none;
 }
 
@@ -147,16 +148,16 @@
 }
 
 .input-group .btn:hover {
-    border-color: #667eea;
-    color: #667eea;
+    border-color: var(--primary);
+    color: var(--primary);
 }
 
 .input-group .form-control:focus + .btn {
-    border-color: #667eea;
+    border-color: var(--primary);
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
     border: none;
     border-radius: 8px;
     font-weight: 600;
@@ -166,7 +167,7 @@
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 10px 25px rgba(11, 110, 88, 0.3);
 }
 
 .btn-primary:active {
