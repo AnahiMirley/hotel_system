@@ -65,8 +65,8 @@ class GastoController extends BaseController
         if (!is_numeric($datos['monto'])) {
             return 'El monto debe ser un número válido.';
         }
-        if ((float) $datos['monto'] < 0) {
-            return 'El monto no puede ser negativo.';
+        if ((float) $datos['monto'] <= 0) {
+            return 'El monto debe ser mayor que cero.';
         }
         if (mb_strlen(trim((string) $datos['concepto'])) < 3) {
             return 'El concepto debe tener al menos 3 caracteres.';
