@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/BaseController.php';
 require_once __DIR__ . '/../models/Reserva.php';
+require_once __DIR__ . '/../models/Habitacion.php';
 
 class ReservaController extends BaseController
 {
@@ -92,6 +93,26 @@ class ReservaController extends BaseController
         return null;
     }
 
+    /**
+     * Verifica que la habitación exista y esté disponible.
+     * Si no lo está, explica el motivo concreto (mantenimiento u ocupada)
+     * en vez de un mensaje genérico de "no disponible".
+     */
+    private function validarDisponibilidadHabitacion(int $idHabitacion): ?string
+    {
+        $habitacion = (new Habitacion())->buscarPorId($idHabitacion);
+        if (!$habitacion) {
+            return 'La habitación seleccionada no existe.';
+        }
+        if ($habitacion['estado'] === 'mantenimiento') {
+            return "La habitación {$habitacion['numero']} está en mantenimiento y no puede reservarse.";
+        }
+        if ($habitacion['estado'] === 'ocupada') {
+            return "La habitación {$habitacion['numero']} está actualmente ocupada.";
+        }
+        return null; // 'disponible' → continúa el flujo normal
+    }
+
     private function crear(): void
     {
         $datos = json_decode(file_get_contents('php://input'), true) ?? [];
@@ -100,6 +121,10 @@ class ReservaController extends BaseController
             $this->respuestaJson(false, $error);
         }
         $error = $this->validarFormatoReserva($datos);
+        if ($error) {
+            $this->respuestaJson(false, $error);
+        }
+        $error = $this->validarDisponibilidadHabitacion((int) $datos['id_habitacion']);
         if ($error) {
             $this->respuestaJson(false, $error);
         }
@@ -119,6 +144,10 @@ class ReservaController extends BaseController
             $this->respuestaJson(false, $error ?? 'ID inválido.');
         }
         $error = $this->validarFormatoReserva($datos);
+        if ($error) {
+            $this->respuestaJson(false, $error);
+        }
+        $error = $this->validarDisponibilidadHabitacion((int) $datos['id_habitacion']);
         if ($error) {
             $this->respuestaJson(false, $error);
         }
