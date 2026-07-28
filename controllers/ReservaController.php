@@ -124,9 +124,13 @@ class ReservaController extends BaseController
         if ($error) {
             $this->respuestaJson(false, $error);
         }
-        $error = $this->validarDisponibilidadHabitacion((int) $datos['id_habitacion']);
-        if ($error) {
-            $this->respuestaJson(false, $error);
+        // Solo exigir disponibilidad si la reserva sigue activa;
+        // cancelar o finalizar una reserva nunca debería bloquearse por el estado de la habitación.
+        if (!in_array($datos['estado'], ['cancelada', 'finalizada'], true)) {
+            $error = $this->validarDisponibilidadHabitacion((int) $datos['id_habitacion']);
+            if ($error) {
+                $this->respuestaJson(false, $error);
+            }
         }
         if ($this->modelo->existeSolapamiento((int) $datos['id_habitacion'], $datos['fecha_entrada'], $datos['fecha_salida'])) {
             $this->respuestaJson(false, 'La habitación ya está reservada en ese rango de fechas.');
